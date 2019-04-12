@@ -12,9 +12,31 @@ before_install:
 
 script:
   - bash test.sh
+  - bash exp4/ImageProcessing.sh -h
+  - bash exp4/ImageProcessing.sh -f /exp4/6.jpeg -cq 5
+  - bash exp4/ImageProcessing.sh -f /exp4/6.jpeg -cr 300 -crt w
+  - bash exp4/ImageProcessing.sh -f /exp4/6.jpeg -aw "hhhh" -awg southwest -awf black -aws 32
+  - bash exp4/ImageProcessing.sh -f /exp4/2.jpg -rn hello -rnt before
+  - bash exp4/ImageProcessing.sh -f /exp4/0.png -cv
+
+  - bash exp4/WorldCupPlayer.sh -h
+  - bash exp4/WorldCupPlayer.sh -f /exp4/worldcupplayerinfo.tsv -a
+  - bash exp4/WorldCupPlayer.sh -f /exp4/worldcupplayerinfo.tsv -p
+  - bash exp4/WorldCupPlayer.sh -f /exp4/worldcupplayerinfo.tsv -n
+  - bash exp4/WorldCupPlayer.sh -f /exp4/worldcupplayerinfo.tsv -m
+
+  - bash exp4/WebLog.sh -h
+  - bash exp4/WebLog.sh -u /images/NASA-logosmall.gif
+  - bash exp4/WebLog.sh -o
+  - bash exp4/WebLog.sh -i
+  - bash exp4/WebLog.sh -f
+  - bash exp4/WebLog.sh -s
+  - bash exp4/WebLog.sh -x
 
 after_script:
   - /usr/bin/shellcheck test.sh
+  - /usr/bin/shellcheck exp4/WebLog.sh
+  - /usr/bin/shellcheck exp4/WorldCupPlayer.sh.sh
 
 after_failure:
   - id
