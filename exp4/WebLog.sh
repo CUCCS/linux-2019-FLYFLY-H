@@ -1,22 +1,22 @@
 #!/bin/bash
 function Q1 {
-	awk '{sum[$1]+=1} END {for(i in sum) {print sum[i],i}}' web_log.tsv | sort -n -r -k 1 | head -n 100 
+	awk '{sum[$1]+=1} END {for(i in sum) {print sum[i],i}}' exp4/web_log.tsv | sort -n -r -k 1 | head -n 100 
 }
 function Q2 {
-        awk '{sum[$1]+=1} END {for(i in sum) {print sum[i],i}}' web_log.tsv | grep -E "[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]" |  sort -n -r -k 1 | head -n 100 
+        awk '{sum[$1]+=1} END {for(i in sum) {print sum[i],i}}' exp4/web_log.tsv | grep -E "[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]" |  sort -n -r -k 1 | head -n 100 
 }
 function Q3 {	
-	awk '{sum[$5]+=1} END {for(i in sum) {print sum[i],i}}' web_log.tsv | sort -n -r -k 1 | head -n 100 
+	awk '{sum[$5]+=1} END {for(i in sum) {print sum[i],i}}' exp4/web_log.tsv | sort -n -r -k 1 | head -n 100 
 }
 function Q4 {
-	awk '{sum[$6]+=1;total+=1} END {for(i in sum) {printf("状态码:%-10d数量:%-15d百分比为:%.2f%%\n",i,sum[i],sum[i]/total*100)}}' web_log.tsv | sort -n -r -k 2
+	awk '{sum[$6]+=1;total+=1} END {for(i in sum) {printf("状态码:%-10d数量:%-15d百分比为:%.2f%%\n",i,sum[i],sum[i]/total*100)}}' exp4/web_log.tsv | sort -n -r -k 2
 }
 function Q5 {
-	awk -F '\t' '{if($6~/^403/) sum[$6" "$5]+=1} END {for(i in sum){print sum[i],i}}' web_log.tsv | sort -n -r -k 1 | head -n 10  
-	awk -F '\t' '{if($6~/^404/) sum[$6" "$5]+=1} END {for(i in sum){print sum[i],i}}' web_log.tsv | sort -n -r -k 1 | head -n 10  
+	awk -F '\t' '{if($6~/^403/) sum[$6" "$5]+=1} END {for(i in sum){print sum[i],i}}' exp4/web_log.tsv | sort -n -r -k 1 | head -n 10  
+	awk -F '\t' '{if($6~/^404/) sum[$6" "$5]+=1} END {for(i in sum){print sum[i],i}}' exp4/web_log.tsv | sort -n -r -k 1 | head -n 10  
 }
 function Q6 {
-	awk -F '\t' '{if($5=="'$1'")sum[$1]+=1} END {for(i in sum){print sum[i],i}}' web_log.tsv | sort -n -r -k 1 | head -n 100
+	awk -F '\t' '{if($5=="'$1'")sum[$1]+=1} END {for(i in sum){print sum[i],i}}' exp4/web_log.tsv | sort -n -r -k 1 | head -n 100
 
 }
 function Q7 {
