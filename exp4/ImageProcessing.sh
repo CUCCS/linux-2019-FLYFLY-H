@@ -34,7 +34,7 @@ function addwatermark {
 	path=${originfile%/*}
 	temp=${originfile##*.}
 	new_name="afteraddwater."${temp}
-	$(convert $1 -gravity $2 -fill $3 -pointsize $4 -draw 'text 5,5 '\'$5\' $path"/"$new_name)
+	$(convert $1 -gravity $2 -fill $3 -pointsize $4 -draw 'text 5,5 '\'"$5"\' $path"/"$new_name)
 	echo "add watermark finish"
 }
 function rename {
