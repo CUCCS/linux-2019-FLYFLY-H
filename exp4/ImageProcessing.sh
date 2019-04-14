@@ -2,9 +2,10 @@
 #set -x
 function compressquality {
 	originfile=$1
+	path=${originfile%/*}
 	temp=${originfile##*.}
 	temp=${temp^^}
-	new_name="new.jpeg"
+	new_name=$path"/new.jpeg"
 	echo $new_name
 	if [[ $temp == "JPEG" ]];then
 		$(convert $1 -quality $2 $new_name)
@@ -15,9 +16,10 @@ function compressquality {
 }
 function compressresolution {
 	originfile=$1
+	path=${originfile%/*}
 	temp=${originfile##*.}
+	new_name=$path"/aftercompress."$temp
 	temp=${temp^^}
-	new_name="aftercompress"$originfile
 	if [[ $temp == "JPEG" || $temp == "PNG" || $temp == "SVG" ]];then
 		if [[ $2 == "h" ]];then
 			$(convert -resize "x"$3 $1 $new_name)
@@ -30,24 +32,27 @@ function compressresolution {
 
 function addwatermark {
 	originfile=$1
+	path=${originfile%/*}
 	temp=${originfile##*.}
 	new_name="afteraddwater."${temp}
-	$(convert $1 -gravity $2 -fill $3 -pointsize $4 -draw 'text 5,5 '\'$5\' $new_name)
+	$(convert $1 -gravity $2 -fill $3 -pointsize $4 -draw 'text 5,5 '\'$5\' $path"/"$new_name)
 	echo "add watermark finish"
 }
 function rename {
 	originfile=$1
+	path=${originfile%/*}
 	mytring=$2
 	suffix=${originfile##*.}
-	preffix=${originfile%.*}
+	temp=${originfile##*/}
+	preffix=${temp%.*}
 	if [[ $3 == "before" ]];then
-		result_name=${mytring}${preffix}"."${suffix};
+		result_name=$path"/"${mytring}${preffix}"."${suffix};
 		$(mv "$originfile" "$result_name")
 	elif [[ $3 == "after" ]];then
-		result_name=${preffix}${mytring}"."${suffix};
+		result_name=$path"/"${preffix}${mytring}"."${suffix};
 		$(mv "$originfile" "$result_name")
 	fi
-	echo "rename success"
+	echo "rename finish"
 }
 function changeformat {
 	originfile=$1
@@ -57,6 +62,7 @@ function changeformat {
 	if [[ $suffix == "PNG" || $suffix == "SVG" ]];then
 		new_name=${preffix}".jpg"
 		$(convert $originfile $new_name)
+		echo "change format finish"
 	fi
 }
 function helpinfo {
