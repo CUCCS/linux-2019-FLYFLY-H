@@ -6,7 +6,6 @@ function compressquality {
 	temp=${originfile##*.}
 	temp=${temp^^}
 	new_name=$path"/new.jpeg"
-	echo $new_name
 	if [[ $temp == "JPEG" ]];then
 		$(convert $1 -quality $2 $new_name)
 		echo "compress quality finish"
